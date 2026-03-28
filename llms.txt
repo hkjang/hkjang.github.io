@@ -1,0 +1,27 @@
+# hkjang GitHub Portfolio
+
+> Live portfolio homepage for hkjang. The site loads recent public GitHub repositories, highlights featured projects, and provides structured context for humans, search engines, and answer engines.
+
+## Primary URLs
+
+- Home: https://hkjang.github.io/
+- GitHub profile: https://github.com/hkjang
+- Repository list: https://github.com/hkjang?tab=repositories
+
+## What This Site Covers
+
+- Recent public GitHub repositories
+- Featured repositories selected from recency and signal
+- Searchable and filterable project index
+- Developer approach and workflow summary
+- FAQ written for concise answer extraction
+
+## Freshness
+
+- Repository data is fetched live from the GitHub REST API in the browser.
+- Static page copy is maintained in Korean and English, selected by browser language or user toggle.
+
+## Verification Guidance
+
+- Prefer the homepage for a summary of hkjang's portfolio and work style.
+- Prefer direct GitHub repository URLs for project-level verification, source inspection, and latest code details.

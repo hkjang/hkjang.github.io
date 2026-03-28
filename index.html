@@ -1,63 +1,146 @@
 <!doctype html>
-<html lang="ko">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>hkjang | GitHub Portfolio</title>
+  <title>hkjang | GitHub Projects, Portfolio, and Developer Profile</title>
   <meta
+    id="metaDescription"
     name="description"
-    content="실시간 GitHub 데이터를 기반으로 최신 프로젝트를 정리해 보여주는 hkjang 포트폴리오 사이트입니다."
+    content="Explore hkjang's live GitHub portfolio with featured repositories, recent public projects, developer approach, and repository search."
+  >
+  <meta
+    name="keywords"
+    id="metaKeywords"
+    content="hkjang, GitHub portfolio, developer portfolio, software projects, open source, repositories"
+  >
+  <meta name="author" content="hkjang">
+  <meta
+    name="robots"
+    content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1"
   >
   <meta name="theme-color" content="#0f172a">
-  <meta property="og:title" content="hkjang | GitHub Portfolio">
-  <meta
-    property="og:description"
-    content="최신 프로젝트, 핵심 역량, GitHub 활동을 한 화면에서 소개하는 포트폴리오 사이트"
-  >
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://hkjang.github.io/">
+  <meta property="og:site_name" content="hkjang GitHub Portfolio">
+  <meta id="ogLocale" property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ko_KR">
+  <meta id="ogTitle" property="og:title" content="hkjang | GitHub Projects, Portfolio, and Developer Profile">
+  <meta
+    id="ogDescription"
+    property="og:description"
+    content="Explore hkjang's live GitHub portfolio with featured repositories, recent public projects, developer approach, and repository search."
+  >
+  <meta id="ogImage" property="og:image" content="https://avatars.githubusercontent.com/u/0?v=4">
+  <meta id="twitterCard" name="twitter:card" content="summary_large_image">
+  <meta id="twitterTitle" name="twitter:title" content="hkjang | GitHub Projects, Portfolio, and Developer Profile">
+  <meta
+    id="twitterDescription"
+    name="twitter:description"
+    content="Explore hkjang's live GitHub portfolio with featured repositories, recent public projects, developer approach, and repository search."
+  >
+  <meta id="twitterImage" name="twitter:image" content="https://avatars.githubusercontent.com/u/0?v=4">
+  <link rel="canonical" href="https://hkjang.github.io/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap"
     rel="stylesheet"
   >
-  <link rel="stylesheet" href="./assets/app.css">
+  <link rel="stylesheet" href="./site.css">
+  <script id="structuredData" type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://hkjang.github.io/#website",
+          "url": "https://hkjang.github.io/",
+          "name": "hkjang GitHub Portfolio",
+          "description": "Live portfolio with recent GitHub repositories, featured projects, and developer profile context.",
+          "inLanguage": ["en", "ko"]
+        },
+        {
+          "@type": "ProfilePage",
+          "@id": "https://hkjang.github.io/#profile",
+          "url": "https://hkjang.github.io/",
+          "name": "hkjang | GitHub Projects, Portfolio, and Developer Profile",
+          "isPartOf": {
+            "@id": "https://hkjang.github.io/#website"
+          },
+          "mainEntity": {
+            "@id": "https://hkjang.github.io/#person"
+          }
+        },
+        {
+          "@type": "Person",
+          "@id": "https://hkjang.github.io/#person",
+          "name": "hkjang",
+          "url": "https://github.com/hkjang",
+          "sameAs": [
+            "https://github.com/hkjang",
+            "https://hkjang.github.io/"
+          ]
+        }
+      ]
+    }
+  </script>
 </head>
 <body data-username="hkjang">
+  <a class="skip-link" href="#content" data-i18n="nav.skip">Skip to content</a>
+
   <div class="site-shell">
     <header class="hero" id="top">
-      <nav class="topbar">
-        <a class="brand" href="#top">
+      <nav class="topbar" aria-label="Primary">
+        <a class="brand" href="#top" aria-label="hkjang home">
           <span class="brand-mark">hk</span>
           <span class="brand-text">hkjang.github.io</span>
         </a>
-        <div class="topbar-links">
-          <a href="#featured">Featured</a>
-          <a href="#projects">Projects</a>
-          <a href="#approach">Approach</a>
-          <a href="#contact">Contact</a>
+
+        <div class="topbar-actions">
+          <div class="topbar-links">
+            <a href="#featured" data-i18n="nav.featured">Featured</a>
+            <a href="#projects" data-i18n="nav.projects">Projects</a>
+            <a href="#approach" data-i18n="nav.approach">Approach</a>
+            <a href="#faq" data-i18n="nav.faq">FAQ</a>
+            <a href="#contact" data-i18n="nav.contact">Contact</a>
+          </div>
+          <button
+            id="localeToggle"
+            class="locale-toggle"
+            type="button"
+            aria-live="polite"
+            aria-label="Switch page language"
+            data-i18n-aria-label="nav.localeToggleAria"
+          >
+            한국어
+          </button>
         </div>
       </nav>
 
       <div class="hero-grid">
         <section class="hero-copy" data-reveal>
-          <p class="eyebrow">Live GitHub Portfolio</p>
-          <h1>계속 만들고, 빠르게 배포하고, 공개적으로 증명합니다.</h1>
-          <p class="lede">
-            이 사이트는 hkjang의 공개 GitHub 저장소를 직접 읽어와 최신 프로젝트를 정리해서 보여줍니다.
-            단순 소개 페이지가 아니라, 최근 작업 흐름과 결과물을 한 번에 훑어볼 수 있는 실전형 포트폴리오입니다.
+          <p class="eyebrow" data-i18n="hero.eyebrow">Live GitHub Portfolio</p>
+          <h1 data-i18n="hero.title">Build continuously, ship quickly, and show the work in public.</h1>
+          <p class="lede" data-i18n="hero.lede">
+            This site reads hkjang's public GitHub repositories live and turns them into a portfolio you can actually review. It is designed to show current output, not just a static self-introduction.
           </p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#projects">프로젝트 전체 보기</a>
-            <a class="button button-secondary" href="https://github.com/hkjang" target="_blank" rel="noreferrer">
-              GitHub 프로필 열기
+            <a class="button button-primary" href="#projects" data-i18n="hero.ctaPrimary">Explore all projects</a>
+            <a
+              class="button button-secondary"
+              href="https://github.com/hkjang"
+              target="_blank"
+              rel="noreferrer"
+              data-i18n="hero.ctaSecondary"
+            >
+              Open GitHub profile
             </a>
           </div>
           <div class="hero-points">
-            <span>최신 공개 저장소 자동 반영</span>
-            <span>100개 이상 프로젝트도 탐색 가능</span>
-            <span>검색, 언어 필터, 정렬 지원</span>
+            <span data-i18n="hero.point1">Live public repository sync</span>
+            <span data-i18n="hero.point2">Built to browse 100+ projects</span>
+            <span data-i18n="hero.point3">Search, filters, and sort controls</span>
           </div>
         </section>
 
@@ -70,180 +153,264 @@
               alt="hkjang GitHub avatar"
             >
             <div>
-              <p class="profile-kicker">GitHub Snapshot</p>
+              <p class="profile-kicker" data-i18n="profile.kicker">GitHub Snapshot</p>
               <h2 id="profileName">hkjang</h2>
-              <p id="profileBio" class="profile-bio">공개 프로필과 저장소를 불러오는 중입니다.</p>
+              <p id="profileBio" class="profile-bio">Loading public profile and repository context.</p>
             </div>
           </div>
 
           <div class="signal-grid">
             <article class="signal-card">
-              <span>Public Repos</span>
+              <span data-i18n="profile.stats.publicRepos">Public Repos</span>
               <strong id="publicRepoCount">-</strong>
             </article>
             <article class="signal-card">
-              <span>Total Stars</span>
+              <span data-i18n="profile.stats.totalStars">Total Stars</span>
               <strong id="totalStars">-</strong>
             </article>
             <article class="signal-card">
-              <span>Languages</span>
+              <span data-i18n="profile.stats.languages">Languages</span>
               <strong id="languageCount">-</strong>
             </article>
             <article class="signal-card">
-              <span>Last Push</span>
+              <span data-i18n="profile.stats.lastPush">Last Push</span>
               <strong id="lastPushDate">-</strong>
             </article>
           </div>
 
           <div class="hero-note" id="dataFreshness">
-            실시간 GitHub 데이터를 준비하는 중입니다.
+            Loading live GitHub data.
           </div>
         </aside>
       </div>
     </header>
 
-    <main>
-      <section class="section section-alt" id="impact">
+    <main id="content">
+      <section class="section section-alt" id="answers">
         <div class="section-heading" data-reveal>
-          <p class="eyebrow">Why This Site</p>
-          <h2>템플릿 소개 페이지가 아니라, 작업량과 실행력을 보여주는 전시관</h2>
-          <p>
-            오래된 정적 포트폴리오 대신, 지금 어떤 프로젝트를 만들고 있고 얼마나 꾸준히 업데이트하고 있는지
-            바로 확인할 수 있도록 설계했습니다.
+          <p class="eyebrow" data-i18n="answers.eyebrow">Quick Answers</p>
+          <h2 data-i18n="answers.title">What should a visitor or search engine understand right away?</h2>
+          <p data-i18n="answers.body">
+            This page is structured to answer basic evaluation questions fast: what hkjang builds, how current the work is, and where to verify the repositories directly.
+          </p>
+        </div>
+
+        <div class="answer-grid">
+          <article class="answer-card" data-reveal>
+            <h3 data-i18n="answers.card1.title">What is this page?</h3>
+            <p data-i18n="answers.card1.body">
+              A live portfolio homepage that summarizes public GitHub activity, featured repositories, and searchable project history.
+            </p>
+          </article>
+          <article class="answer-card" data-reveal>
+            <h3 data-i18n="answers.card2.title">How fresh is the content?</h3>
+            <p data-i18n="answers.card2.body">
+              Repository lists are fetched from the GitHub REST API in the browser, so the project grid updates as public repositories change.
+            </p>
+          </article>
+          <article class="answer-card" data-reveal>
+            <h3 data-i18n="answers.card3.title">What can you verify here?</h3>
+            <p data-i18n="answers.card3.body">
+              Visitors can inspect repository names, descriptions, languages, stars, recent push dates, and direct links to source or live demos.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="impact">
+        <div class="section-heading" data-reveal>
+          <p class="eyebrow" data-i18n="impact.eyebrow">Why This Site</p>
+          <h2 data-i18n="impact.title">Not a generic intro template, but a portfolio that proves recent output</h2>
+          <p data-i18n="impact.body">
+            Instead of keeping a stale one-page theme, this site is optimized to show recent repositories, volume of work, and the way projects are maintained over time.
           </p>
         </div>
 
         <div class="value-grid">
           <article class="value-card" data-reveal>
             <p class="value-index">01</p>
-            <h3>실시간 신뢰도</h3>
-            <p>
-              GitHub API에서 최신 저장소 목록을 직접 가져와서 배포 이후에도 포트폴리오가 계속 살아 움직입니다.
+            <h3 data-i18n="impact.card1.title">Live credibility</h3>
+            <p data-i18n="impact.card1.body">
+              Repository data comes from GitHub directly, so the portfolio stays useful after deployment without hand-editing each new project.
             </p>
           </article>
           <article class="value-card" data-reveal>
             <p class="value-index">02</p>
-            <h3>대량 프로젝트 탐색</h3>
-            <p>
-              100개가 넘는 프로젝트도 검색, 언어 필터, 정렬로 빠르게 훑어볼 수 있게 구성했습니다.
+            <h3 data-i18n="impact.card2.title">Built for scale</h3>
+            <p data-i18n="impact.card2.body">
+              Search, language filters, and sorting make it practical to browse well over 100 repositories without drowning in a long static list.
             </p>
           </article>
           <article class="value-card" data-reveal>
             <p class="value-index">03</p>
-            <h3>홍보용 메시지 정리</h3>
-            <p>
-              결과물만 나열하지 않고, 어떤 스타일로 만들고 배포하는 사람인지까지 전달되도록 카피와 구조를 다듬었습니다.
+            <h3 data-i18n="impact.card3.title">Promotion-ready story</h3>
+            <p data-i18n="impact.card3.body">
+              The copy and layout explain not just what exists, but what kind of builder and shipper hkjang is.
             </p>
           </article>
         </div>
       </section>
 
-      <section class="section" id="featured">
+      <section class="section section-alt" id="featured">
         <div class="section-heading" data-reveal>
-          <p class="eyebrow">Featured Projects</p>
-          <h2>최근 활동성과 완성도를 함께 보여주는 대표 프로젝트</h2>
-          <p>
-            최신 업데이트, 설명 충실도, 관심도 신호를 기준으로 우선 노출할 프로젝트를 자동 선정합니다.
+          <p class="eyebrow" data-i18n="featured.eyebrow">Featured Projects</p>
+          <h2 data-i18n="featured.title">Representative repositories chosen from recency, clarity, and traction</h2>
+          <p data-i18n="featured.body">
+            Featured cards are selected automatically so a visitor can start with likely high-signal projects instead of guessing where to look first.
           </p>
         </div>
         <div id="featuredProjects" class="repo-grid repo-grid-featured" aria-live="polite">
           <article class="repo-card repo-card-placeholder">
-            <p>대표 프로젝트를 계산하는 중입니다.</p>
+            <p>Calculating featured repositories.</p>
           </article>
         </div>
       </section>
 
-      <section class="section section-alt" id="projects">
+      <section class="section" id="projects">
         <div class="section-heading" data-reveal>
-          <p class="eyebrow">Project Explorer</p>
-          <h2>최신 공개 프로젝트 전체를 한 번에 탐색</h2>
-          <p>
-            최신순, 스타순, 이름순으로 정렬하고 언어별로 필터링할 수 있습니다. 저장소가 많아도 핵심만 빠르게 찾을 수 있습니다.
+          <p class="eyebrow" data-i18n="explorer.eyebrow">Project Explorer</p>
+          <h2 data-i18n="explorer.title">Browse the latest public repositories in one place</h2>
+          <p data-i18n="explorer.body">
+            Sort by recent activity, stars, or name, then narrow the list with search and language filters to find relevant work quickly.
           </p>
         </div>
 
         <div class="controls-panel" data-reveal>
           <label class="control search-control">
-            <span>검색</span>
-            <input id="searchInput" type="search" placeholder="프로젝트 이름, 설명, 언어 검색">
+            <span data-i18n="explorer.searchLabel">Search</span>
+            <input
+              id="searchInput"
+              type="search"
+              data-i18n-placeholder="explorer.searchPlaceholder"
+              placeholder="Search by project name, description, or language"
+            >
           </label>
           <label class="control">
-            <span>언어</span>
+            <span data-i18n="explorer.languageLabel">Language</span>
             <select id="languageFilter">
-              <option value="all">전체</option>
+              <option value="all">All</option>
             </select>
           </label>
           <label class="control">
-            <span>구성</span>
+            <span data-i18n="explorer.typeLabel">Composition</span>
             <select id="typeFilter">
-              <option value="all">전체</option>
-              <option value="source">원본 프로젝트만</option>
-              <option value="forks">포크 포함</option>
-              <option value="archived">아카이브만</option>
+              <option value="all">All</option>
+              <option value="source">Original projects only</option>
+              <option value="forks">Forks only</option>
+              <option value="archived">Archived only</option>
             </select>
           </label>
           <label class="control">
-            <span>정렬</span>
+            <span data-i18n="explorer.sortLabel">Sort</span>
             <select id="sortSelect">
-              <option value="updated">최신 업데이트순</option>
-              <option value="stars">스타순</option>
-              <option value="name">이름순</option>
+              <option value="updated">Most recently updated</option>
+              <option value="stars">Most starred</option>
+              <option value="name">Name A-Z</option>
             </select>
           </label>
         </div>
 
         <div class="results-bar" data-reveal>
-          <p id="resultSummary">프로젝트 데이터를 불러오는 중입니다.</p>
+          <p id="resultSummary">Loading repository data.</p>
           <button id="loadMoreButton" class="button button-secondary" type="button">
-            더 보기
+            Load more
           </button>
         </div>
 
         <div id="projectGrid" class="repo-grid" aria-live="polite">
           <article class="repo-card repo-card-placeholder">
-            <p>저장소 목록을 준비하고 있습니다.</p>
+            <p>Preparing repository list.</p>
           </article>
         </div>
       </section>
 
-      <section class="section" id="approach">
+      <section class="section section-alt" id="approach">
         <div class="section-heading" data-reveal>
-          <p class="eyebrow">Approach</p>
-          <h2>만드는 방식도 함께 보여줍니다</h2>
-          <p>
-            빠르게 만들고 끝내는 것이 아니라, 공개 저장소와 배포 기록으로 반복 개선하는 개발 방식을 지향합니다.
+          <p class="eyebrow" data-i18n="approach.eyebrow">Approach</p>
+          <h2 data-i18n="approach.title">The work style is part of the portfolio too</h2>
+          <p data-i18n="approach.body">
+            The goal is not to finish a page and freeze it, but to keep repository history, public output, and deployment-ready presentation aligned.
           </p>
         </div>
 
         <div class="approach-grid">
           <article class="approach-card" data-reveal>
-            <h3>Ship Fast</h3>
-            <p>프로토타입을 빠르게 공개하고 실제 사용 가능한 상태로 끌어올립니다.</p>
+            <h3 data-i18n="approach.card1.title">Ship Fast</h3>
+            <p data-i18n="approach.card1.body">
+              Prototype early, deploy quickly, and turn rough ideas into inspectable public artifacts.
+            </p>
           </article>
           <article class="approach-card" data-reveal>
-            <h3>Keep Iterating</h3>
-            <p>최근 커밋과 저장소 정리를 통해 실험이 끊기지 않는 흐름을 유지합니다.</p>
+            <h3 data-i18n="approach.card2.title">Keep Iterating</h3>
+            <p data-i18n="approach.card2.body">
+              Recent pushes and repo maintenance show that experimentation does not stop at the first working version.
+            </p>
           </article>
           <article class="approach-card" data-reveal>
-            <h3>Show the Work</h3>
-            <p>작업 결과를 외부에서 바로 검토할 수 있도록 링크와 메타데이터를 투명하게 드러냅니다.</p>
+            <h3 data-i18n="approach.card3.title">Show the Work</h3>
+            <p data-i18n="approach.card3.body">
+              Source links, metadata, and direct repository access make the work easy to verify rather than merely claim.
+            </p>
           </article>
+        </div>
+      </section>
+
+      <section class="section" id="faq">
+        <div class="section-heading" data-reveal>
+          <p class="eyebrow" data-i18n="faq.eyebrow">FAQ</p>
+          <h2 data-i18n="faq.title">Questions this portfolio should answer clearly</h2>
+          <p data-i18n="faq.body">
+            These answers are written for both people and answer engines that need concise, direct context about the portfolio.
+          </p>
+        </div>
+
+        <div class="faq-list">
+          <details class="faq-item" open data-reveal>
+            <summary data-i18n="faq.q1">What kind of projects does hkjang build?</summary>
+            <p data-i18n="faq.a1">
+              This portfolio highlights public GitHub repositories across software tooling, experiments, deployable apps, and ongoing development work.
+            </p>
+          </details>
+          <details class="faq-item" data-reveal>
+            <summary data-i18n="faq.q2">How does this page stay current?</summary>
+            <p data-i18n="faq.a2">
+              The repository index is loaded from the GitHub REST API in the browser, so new public repositories and recent updates appear without rewriting the page content manually.
+            </p>
+          </details>
+          <details class="faq-item" data-reveal>
+            <summary data-i18n="faq.q3">Where should someone verify project details?</summary>
+            <p data-i18n="faq.a3">
+              Every repository card links directly to GitHub, and projects with a homepage can also link to a live deployment or demo.
+            </p>
+          </details>
         </div>
       </section>
 
       <section class="section section-cta" id="contact">
         <div class="cta-card" data-reveal>
-          <p class="eyebrow">Open for Collaboration</p>
-          <h2>프로젝트 검토, 협업 제안, 기술 확인은 GitHub에서 바로 이어갈 수 있습니다.</h2>
-          <p>
-            가장 최신 정보는 항상 GitHub에 있습니다. 관심 있는 저장소를 바로 열어보고, 필요하면 이슈나 협업 제안으로 연결하세요.
+          <p class="eyebrow" data-i18n="cta.eyebrow">Open for Collaboration</p>
+          <h2 data-i18n="cta.title">Project review, technical validation, and collaboration can start directly from GitHub.</h2>
+          <p data-i18n="cta.body">
+            The freshest details are always on GitHub. Open a repository, inspect the code, and continue from issues, discussions, or direct collaboration.
           </p>
           <div class="hero-actions">
-            <a class="button button-primary" href="https://github.com/hkjang?tab=repositories" target="_blank" rel="noreferrer">
-              전체 저장소 보기
+            <a
+              class="button button-primary"
+              href="https://github.com/hkjang?tab=repositories"
+              target="_blank"
+              rel="noreferrer"
+              data-i18n="cta.primary"
+            >
+              View all repositories
             </a>
-            <a class="button button-secondary" href="https://github.com/hkjang" target="_blank" rel="noreferrer">
-              프로필 방문
+            <a
+              class="button button-secondary"
+              href="https://github.com/hkjang"
+              target="_blank"
+              rel="noreferrer"
+              data-i18n="cta.secondary"
+            >
+              Visit profile
             </a>
           </div>
         </div>
@@ -251,17 +418,17 @@
     </main>
 
     <footer class="footer">
-      <p>Built for GitHub Pages. Live data from the GitHub REST API.</p>
+      <p data-i18n="footer.builtWith">Built for GitHub Pages with live data from the GitHub REST API and structured metadata for search.</p>
       <p>&copy; <span id="currentYear"></span> hkjang</p>
     </footer>
   </div>
 
   <noscript>
     <div class="noscript-banner">
-      이 사이트는 최신 GitHub 프로젝트를 불러오기 위해 JavaScript가 필요합니다.
+      This site uses JavaScript to load live GitHub repository data. JavaScript가 필요합니다.
     </div>
   </noscript>
 
-  <script type="module" src="./assets/app.js"></script>
+  <script type="module" src="./site.js"></script>
 </body>
 </html>
