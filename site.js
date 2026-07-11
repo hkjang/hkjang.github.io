@@ -1,5 +1,6 @@
 const username = document.body.dataset.username || "hkjang";
-const cacheKey = `portfolio:${username}:v4`;
+const cacheKey = `portfolio:${username}:v5`;
+const pinnedProjectNames = ["vibe-coders", "clustara", "jayu", "dataworks", "ArgosAISecurity", "signal-hub"];
 const localeKey = `portfolio:${username}:locale`;
 const cacheTtlMs = 1000 * 60 * 30;
 const initialVisibleCount = 18;
@@ -52,16 +53,16 @@ const koStaticText = {
   "nav.approach": "실행 방식",
   "nav.faq": "FAQ",
   "nav.contact": "협업",
-  "hero.eyebrow": "라이브 GitHub 포트폴리오",
-  "hero.title": "AI와 소프트웨어를 빠르게 제품화하고, 공개된 결과로 실행력을 증명합니다.",
+  "hero.eyebrow": "Enterprise AI · Cloud Native · Open Source",
+  "hero.title": "복잡한 기업 운영 문제를 실행 가능한 AI 플랫폼으로 만듭니다.",
   "hero.lede":
-    "이 사이트는 hkjang의 GitHub 공개 저장소를 실시간으로 정리해, 기술 역량과 제품화 감각, 업데이트 속도를 한눈에 보여주는 포트폴리오입니다. 한국의 IT·AI 전문가와 투자자가 최근 프로젝트 흐름을 바로 검토할 수 있도록 구성했습니다.",
-  "hero.ctaPrimary": "프로젝트 전체 보기",
-  "hero.ctaSecondary": "GitHub 프로필 열기",
-  "hero.point1": "실시간 공개 저장소 반영",
-  "hero.point2": "100개 이상 프로젝트 탐색 구조",
-  "hero.point3": "기술·제품·업데이트 신호 확인",
-  "profile.kicker": "GitHub 기반 포트폴리오",
+    "장현국은 AI Gateway, Kubernetes 통합 운영, 데이터 플랫폼, DevSecOps, 개발 자동화 영역에서 실제 사용 가능한 오픈소스 제품을 설계하고 구현합니다.",
+  "hero.ctaPrimary": "대표 프로젝트 보기",
+  "hero.ctaSecondary": "GitHub에서 소스 확인",
+  "hero.point1": "엔터프라이즈 AI 플랫폼 설계",
+  "hero.point2": "Kubernetes·Data·DevSecOps 제품화",
+  "hero.point3": "검증 가능한 오픈소스 결과물",
+  "profile.kicker": "장현국 · hkjang",
   "profile.stats.publicRepos": "공개 저장소",
   "profile.stats.totalStars": "전체 스타",
   "profile.stats.languages": "언어 수",
@@ -93,8 +94,8 @@ const koStaticText = {
   "impact.card3.body":
     "단순 작업 목록이 아니라 무엇을 만들었고 어떤 문제를 푸는 사람인지가 자연스럽게 드러나도록 카피를 정리했습니다.",
   "featured.eyebrow": "대표 프로젝트",
-  "featured.title": "최근성, 완성도, 시장 신호를 함께 반영한 핵심 저장소",
-  "featured.body": "처음 방문한 사람이 어디부터 봐야 할지 고민하지 않도록, 업데이트 속도와 설명 밀도, 관심도 신호를 기준으로 우선 노출합니다.",
+  "featured.title": "전문 분야를 가장 잘 보여주는 대표 제품과 핵심 저장소",
+  "featured.body": "수동으로 지정한 대표 프로젝트를 먼저 보여주고, 부족한 슬롯은 GitHub 업데이트·설명 완성도·관심도 신호로 자동 보완합니다.",
   "explorer.eyebrow": "프로젝트 탐색",
   "explorer.title": "최신 공개 프로젝트를 기술 관점과 제품 관점에서 함께 탐색",
   "explorer.body":
@@ -138,7 +139,7 @@ const dynamicCopy = {
     localeToggleAria: "Switch page language",
     searchPlaceholder: defaultPlaceholderText.get("explorer.searchPlaceholder"),
     loadingBio: "Loading public profile and repository context.",
-    fallbackBio: "A live portfolio that organizes recent public repositories and project activity into one reviewable page.",
+    fallbackBio: "Enterprise AI Platform Architect · Open Source Builder",
     loadingData: "Loading live GitHub data.",
     statusLive: ({ time }) => `Live GitHub data synced ${time}.`,
     statusCached: ({ time }) => `Showing a recent cached GitHub snapshot from ${time}.`,
@@ -174,15 +175,15 @@ const dynamicCopy = {
   },
   ko: {
     meta: {
-      title: "hkjang | AI·소프트웨어 GitHub 포트폴리오",
-      description: "AI와 소프트웨어 프로젝트를 빠르게 제품화하는 hkjang의 최신 GitHub 저장소, 대표 프로젝트, 실행 방식, 공개 업데이트 흐름을 한눈에 볼 수 있는 포트폴리오입니다.",
-      keywords: "hkjang, AI 포트폴리오, 소프트웨어 포트폴리오, GitHub 포트폴리오, 개발자, 스타트업, 투자, 오픈소스, 자동화, 인공지능",
+      title: "장현국 | Enterprise AI, Kubernetes and Data Platform Engineer",
+      description: "AI Gateway, Kubernetes 통합 운영, 데이터 플랫폼, DevSecOps와 개발 자동화 제품을 만드는 장현국의 오픈소스 포트폴리오입니다.",
+      keywords: "장현국, hkjang, 엔터프라이즈 AI, Kubernetes, 데이터 플랫폼, DevSecOps, 개발 자동화, 오픈소스 포트폴리오",
     },
     localeToggleLabel: "English",
     localeToggleAria: "페이지 언어 전환",
     searchPlaceholder: "프로젝트명, 설명, 기술 키워드 검색",
     loadingBio: "공개 프로필과 최신 프로젝트 흐름을 불러오는 중입니다.",
-    fallbackBio: "AI와 소프트웨어 프로젝트를 빠르게 제품화하고, 공개 저장소로 실행력을 증명하는 포트폴리오입니다.",
+    fallbackBio: "Enterprise AI Platform Architect · Open Source Builder",
     loadingData: "GitHub에서 최신 프로젝트 데이터를 불러오는 중입니다.",
     statusLive: ({ time }) => `GitHub 실시간 데이터 기준입니다. 마지막 동기화: ${time}`,
     statusCached: ({ time }) => `최근 캐시된 GitHub 스냅샷 기준입니다. 마지막 동기화: ${time}`,
@@ -499,10 +500,15 @@ function applyFilters() {
 }
 
 function renderFeaturedProjects() {
-  const featured = [...state.repos]
-    .filter((repo) => !repo.archived && !repo.fork)
-    .sort((left, right) => featuredScore(right) - featuredScore(left))
-    .slice(0, 6);
+  const eligible = state.repos.filter((repo) => !repo.archived && !repo.fork);
+  const pinned = pinnedProjectNames
+    .map((name) => eligible.find((repo) => repo.name.toLowerCase() === name.toLowerCase()))
+    .filter(Boolean);
+  const pinnedIds = new Set(pinned.map((repo) => repo.id));
+  const automatic = eligible
+    .filter((repo) => !pinnedIds.has(repo.id))
+    .sort((left, right) => featuredScore(right) - featuredScore(left));
+  const featured = [...pinned, ...automatic].slice(0, 6);
 
   if (!featured.length) {
     elements.featuredProjects.innerHTML = `<article class="repo-card repo-card-placeholder"><p>${escapeHtml(copy().featuredEmpty)}</p></article>`;
@@ -641,7 +647,7 @@ function updateStructuredData() {
           "@type": "WebSite",
           "@id": "https://hkjang.github.io/#website",
           url: "https://hkjang.github.io/",
-          name: "hkjang GitHub Portfolio",
+          name: "HKJANG LAB",
           description: currentCopy.meta.description,
           inLanguage: ["en", "ko"],
           about: {
@@ -668,7 +674,7 @@ function updateStructuredData() {
           name: profileName,
           alternateName: username,
           url: "https://github.com/hkjang",
-          image: profile.avatar_url || "https://avatars.githubusercontent.com/u/0?v=4",
+          image: profile.avatar_url || "https://github.com/hkjang.png",
           description: profileDescription,
           sameAs: ["https://github.com/hkjang", "https://hkjang.github.io/"],
           knowsAbout: topLanguages,
