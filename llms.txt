@@ -1,6 +1,6 @@
-# hkjang GitHub Portfolio
+# HKJANG LAB
 
-> Live portfolio homepage for hkjang. The site loads recent public GitHub repositories, highlights featured projects, and provides structured context for humans, search engines, and answer engines.
+> Live portfolio for 장현국 (hkjang), an enterprise AI and cloud-native platform builder. The site highlights open-source work across AI gateways, Kubernetes operations, data platforms, DevSecOps, and developer productivity.
 
 ## Primary URLs
 
@@ -10,9 +10,10 @@
 
 ## What This Site Covers
 
+- Flagship open-source projects selected from strategic pins and live GitHub signals
 - Recent public GitHub repositories
-- Featured repositories selected from recency and signal
 - Searchable and filterable project index
+- Enterprise AI, Kubernetes, data platform, DevSecOps, and developer productivity positioning
 - Developer approach and workflow summary
 - FAQ written for concise answer extraction
 
@@ -20,8 +21,9 @@
 
 - Repository data is fetched live from the GitHub REST API in the browser.
 - Static page copy is maintained in Korean and English, selected by browser language or user toggle.
+- GitHub API results are cached in the browser for temporary resilience.
 
 ## Verification Guidance
 
-- Prefer the homepage for a summary of hkjang's portfolio and work style.
+- Prefer the homepage for a summary of hkjang's portfolio, positioning, and flagship projects.
 - Prefer direct GitHub repository URLs for project-level verification, source inspection, and latest code details.

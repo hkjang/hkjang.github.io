@@ -1,12 +1,14 @@
 # Site settings
-title:
-email:
-description: > # this means to ignore newlines until "baseurl:"
-baseurl: "" # the subpath of your site, e.g. /blog/
-url: "" # the base hostname & protocol for your site
+title: "HKJANG LAB"
+email: ""
+description: >-
+  Live portfolio for enterprise AI, Kubernetes operations, data platform,
+  DevSecOps, developer productivity, and open-source projects by 장현국 (hkjang).
+baseurl: ""
+url: "https://hkjang.github.io"
 
 twitter_username:
-github_username:
+github_username: hkjang
 
 # Build settings
 markdown: kramdown
