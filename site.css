@@ -62,6 +62,10 @@ body::before {
 }
 
 .hero {
+  --hero-x: 50%;
+  --hero-y: 38%;
+  --hero-shift-x: 0px;
+  --hero-shift-y: 0px;
   position: relative;
   margin-top: -82px;
   padding: 112px 0 64px;
@@ -83,6 +87,15 @@ body::before {
   background-size: 64px 64px;
   content: "";
   mask-image: linear-gradient(90deg, #000, transparent 78%);
+}
+
+.hero::after {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle 280px at var(--hero-x) var(--hero-y), rgba(184, 255, 79, 0.12), transparent 72%);
+  content: "";
+  transition: background-position 120ms linear;
 }
 
 .hero-grid {
@@ -111,10 +124,11 @@ body::before {
 }
 
 .hero-copy h1 {
-  max-width: 12ch;
+  max-width: 15ch;
   color: #fff;
-  font-size: clamp(3.1rem, 6vw, 6.8rem);
-  line-height: 0.89;
+  font-size: clamp(2.65rem, 4.6vw, 5.25rem);
+  line-height: 1.01;
+  letter-spacing: -0.055em;
   text-wrap: balance;
 }
 
@@ -153,6 +167,7 @@ body::before {
   border-radius: 50%;
   background: #b8ff4f;
   box-shadow: 0 0 14px #b8ff4f;
+  animation: status-pulse 2.4s ease-in-out infinite;
 }
 
 .hero .button-primary {
@@ -176,6 +191,20 @@ body::before {
   min-height: 610px;
   overflow: hidden;
   border-radius: 44px 4px 44px 4px;
+  transform: translate3d(var(--hero-shift-x), var(--hero-shift-y), 0);
+  transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero-lab::after {
+  position: absolute;
+  right: 0;
+  left: 0;
+  z-index: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(184, 255, 79, 0.8), transparent);
+  box-shadow: 0 0 20px rgba(184, 255, 79, 0.45);
+  content: "";
+  animation: lab-scan 5.5s ease-in-out infinite;
 }
 
 .lab-orbit {
@@ -188,6 +217,7 @@ body::before {
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 50%;
   background: radial-gradient(circle, rgba(184, 255, 79, 0.16), transparent 54%);
+  animation: orbit-spin 22s linear infinite;
 }
 
 .lab-orbit::before,
@@ -199,11 +229,16 @@ body::before {
   content: "";
 }
 
+.lab-orbit::before {
+  animation: orbit-spin-reverse 13s linear infinite;
+}
+
 .lab-orbit::after {
   inset: 34%;
   border-style: solid;
   background: #b8ff4f;
   box-shadow: 0 0 80px rgba(184, 255, 79, 0.52);
+  animation: core-breathe 3.8s ease-in-out infinite;
 }
 
 .lab-orbit span {
@@ -345,6 +380,35 @@ main {
   box-shadow: 0 16px 42px rgba(17, 32, 59, 0.12);
 }
 
+@keyframes orbit-spin {
+  to { transform: translateX(-50%) rotate(360deg); }
+}
+
+@keyframes orbit-spin-reverse {
+  to { transform: rotate(-360deg); }
+}
+
+@keyframes core-breathe {
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 0 110px rgba(184, 255, 79, 0.68);
+  }
+}
+
+@keyframes lab-scan {
+  0%, 12% { top: 5%; opacity: 0; }
+  24% { opacity: 0.8; }
+  78% { opacity: 0.35; }
+  88%, 100% { top: 95%; opacity: 0; }
+}
+
+@keyframes status-pulse {
+  50% {
+    opacity: 0.55;
+    transform: scale(0.78);
+  }
+}
+
 .repo-link {
   display: inline-flex;
   align-items: center;
@@ -419,7 +483,7 @@ main {
   }
 
   .hero-copy h1 {
-    font-size: clamp(3rem, 7vw, 5rem);
+    font-size: clamp(2.65rem, 5.4vw, 4.35rem);
   }
 }
 
@@ -486,7 +550,7 @@ main {
   }
 
   .hero-copy h1 {
-    font-size: clamp(3rem, 14vw, 4.6rem);
+    font-size: clamp(2.55rem, 11.5vw, 3.7rem);
   }
 
   .hero-lab {
