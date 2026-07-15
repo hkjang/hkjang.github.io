@@ -1,6 +1,6 @@
 # HKJANG LAB
 
-Live GitHub portfolio for **Hyungkuk Jang (hkjang)**, focused on enterprise AI, cloud-native operations, data platforms, DevSecOps, and developer productivity projects.
+Live GitHub portfolio for **Hyeongkuk Jang (장형국, hkjang)**, focused on AI, cloud-native operations, data platforms, DevSecOps, and developer productivity projects.
 
 The site reads public GitHub repositories in the browser, highlights flagship work first, and keeps the full project explorer searchable and filterable without manually editing a static project list.
 

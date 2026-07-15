@@ -1,6 +1,6 @@
 # HKJANG LAB
 
-> Live portfolio for 장현국 (hkjang), an enterprise AI and cloud-native platform builder. The site highlights open-source work across AI gateways, Kubernetes operations, data platforms, DevSecOps, and developer productivity.
+> Live portfolio for 장형국 (hkjang), an AI and cloud-native platform builder. The site highlights open-source work across AI gateways, Kubernetes operations, data platforms, DevSecOps, and developer productivity.
 
 ## Primary URLs
 
