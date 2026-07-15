@@ -58,7 +58,7 @@ const koStaticText = {
   "hero.eyebrow": "Enterprise AI · Cloud Native · Open Source",
   "hero.title": "복잡한 기술을, 사람이 실제로 쓰는 시스템으로 만듭니다.",
   "hero.lede":
-    "장형국은 AI, 클라우드 네이티브 인프라, 데이터 플랫폼과 개발 도구를 실제 코드로 탐구합니다. 완성된 주장만이 아니라 공개 저장소와 업데이트, 시행착오까지 함께 보여드립니다.",
+    "AI, 클라우드 네이티브 인프라, 데이터 플랫폼과 개발 도구를 탐구한 공개 저장소입니다. 완성된 주장만이 아니라 업데이트와 시행착오까지 함께 보여드립니다.",
   "hero.ctaPrimary": "대표 프로젝트 보기",
   "hero.ctaSecondary": "GitHub에서 소스 확인",
   "hero.point1": "엔터프라이즈 AI 플랫폼 설계",
