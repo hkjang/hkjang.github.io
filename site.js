@@ -22,6 +22,7 @@ const elements = {
   languageFilter: document.getElementById("languageFilter"),
   typeFilter: document.getElementById("typeFilter"),
   sortSelect: document.getElementById("sortSelect"),
+  resetFiltersButton: document.getElementById("resetFiltersButton"),
   resultSummary: document.getElementById("resultSummary"),
   loadMoreButton: document.getElementById("loadMoreButton"),
   projectGrid: document.getElementById("projectGrid"),
@@ -104,6 +105,7 @@ const koStaticText = {
   "explorer.languageLabel": "언어",
   "explorer.typeLabel": "프로젝트 유형",
   "explorer.sortLabel": "정렬 기준",
+  "explorer.reset": "필터 초기화",
   "approach.eyebrow": "실행 방식",
   "approach.title": "문제 정의부터 공개 검증까지 빠르게 연결합니다",
   "approach.body":
@@ -268,11 +270,37 @@ function bindControls() {
   elements.languageFilter.addEventListener("change", rerender);
   elements.typeFilter.addEventListener("change", rerender);
   elements.sortSelect.addEventListener("change", rerender);
+  elements.resetFiltersButton.addEventListener("click", resetFilters);
   elements.loadMoreButton.addEventListener("click", () => {
     state.visibleCount += loadIncrement;
     renderProjectGrid();
   });
   elements.localeToggle.addEventListener("click", toggleLocale);
+  document.addEventListener("keydown", handleExplorerShortcut);
+}
+
+function resetFilters() {
+  elements.searchInput.value = "";
+  elements.languageFilter.value = "all";
+  elements.typeFilter.value = "all";
+  elements.sortSelect.value = "updated";
+  state.visibleCount = initialVisibleCount;
+  applyFilters();
+  elements.searchInput.focus();
+}
+
+function handleExplorerShortcut(event) {
+  const isTyping = /^(INPUT|SELECT|TEXTAREA)$/.test(document.activeElement?.tagName);
+
+  if (event.key === "/" && !isTyping && !event.metaKey && !event.ctrlKey && !event.altKey) {
+    event.preventDefault();
+    elements.searchInput.focus();
+  } else if (event.key === "Escape" && document.activeElement === elements.searchInput) {
+    elements.searchInput.value = "";
+    state.visibleCount = initialVisibleCount;
+    applyFilters();
+    elements.searchInput.blur();
+  }
 }
 
 function toggleLocale() {
@@ -465,6 +493,7 @@ function applyFilters() {
   const language = elements.languageFilter.value;
   const type = elements.typeFilter.value;
   const sort = elements.sortSelect.value;
+  const hasActiveFilters = Boolean(query || language !== "all" || type !== "all" || sort !== "updated");
   let filtered = [...state.repos];
 
   if (query) {
@@ -495,6 +524,7 @@ function applyFilters() {
   }
 
   state.filteredRepos = filtered;
+  elements.resetFiltersButton.hidden = !hasActiveFilters;
   renderFeaturedProjects();
   renderProjectGrid();
 }

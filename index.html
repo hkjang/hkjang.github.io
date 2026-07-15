@@ -90,14 +90,13 @@
   <a class="skip-link" href="#content" data-i18n="nav.skip">Skip to content</a>
 
   <div class="site-shell">
-    <header class="hero" id="top">
-      <nav class="topbar" aria-label="Primary">
-        <a class="brand" href="#top" aria-label="hkjang home">
+    <nav class="topbar" aria-label="Primary">
+      <a class="brand" href="#top" aria-label="hkjang home">
           <span class="brand-mark">hk</span>
           <span class="brand-text">hkjang.github.io</span>
         </a>
 
-        <div class="topbar-actions">
+      <div class="topbar-actions">
           <div class="topbar-links">
             <a href="#featured" data-i18n="nav.featured">Featured</a>
             <a href="#projects" data-i18n="nav.projects">Projects</a>
@@ -115,9 +114,10 @@
           >
             한국어
           </button>
-        </div>
-      </nav>
+      </div>
+    </nav>
 
+    <header class="hero" id="top">
       <div class="hero-grid">
         <section class="hero-copy" data-reveal>
           <p class="eyebrow" data-i18n="hero.eyebrow">Enterprise AI · Cloud Native · Open Source</p>
@@ -126,7 +126,7 @@
             장현국 designs and ships open-source products across AI gateways, Kubernetes operations, data platforms, DevSecOps, and developer productivity—turning complex enterprise problems into working platforms.
           </p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#projects" data-i18n="hero.ctaPrimary">Explore flagship projects</a>
+            <a class="button button-primary" href="#featured" data-i18n="hero.ctaPrimary">Explore flagship projects</a>
             <a
               class="button button-secondary"
               href="https://github.com/hkjang"
@@ -281,6 +281,8 @@
             <input
               id="searchInput"
               type="search"
+              autocomplete="off"
+              aria-controls="projectGrid"
               data-i18n-placeholder="explorer.searchPlaceholder"
               placeholder="Search by project name, description, or language"
             >
@@ -308,10 +310,13 @@
               <option value="name">Name A-Z</option>
             </select>
           </label>
+          <button id="resetFiltersButton" class="reset-filters" type="button" data-i18n="explorer.reset" hidden>
+            Reset filters
+          </button>
         </div>
 
         <div class="results-bar" data-reveal>
-          <p id="resultSummary">Loading repository data.</p>
+          <p id="resultSummary" role="status" aria-live="polite" aria-atomic="true">Loading repository data.</p>
           <button id="loadMoreButton" class="button button-secondary" type="button">
             Load more
           </button>
