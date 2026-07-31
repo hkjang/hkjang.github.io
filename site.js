@@ -1,6 +1,6 @@
 const username = document.body.dataset.username || "hkjang";
-const cacheKey = `portfolio:${username}:v5`;
-const pinnedProjectNames = ["vibe-coders", "clustara", "jayu", "dataworks", "ArgosAISecurity", "signal-hub"];
+const cacheKey = `portfolio:${username}:v6`;
+const pinnedProjectNames = ["invenqor", "vibe-coders", "clustara", "jayu", "dataworks", "ArgosAISecurity", "signal-hub"];
 const localeKey = `portfolio:${username}:locale`;
 const cacheTtlMs = 1000 * 60 * 30;
 const initialVisibleCount = 18;
@@ -148,7 +148,7 @@ const dynamicCopy = {
     statusCached: ({ time }) => `Showing a recent cached GitHub snapshot from ${time}.`,
     statusStale: ({ time }) => `Showing a temporary cached GitHub snapshot from ${time}.`,
     allLabel: "All",
-    typeOptions: { all: "All", source: "Original projects only", forks: "Forks only", archived: "Archived only" },
+    typeOptions: { all: "All", promo: "✨ Promo page only", source: "Original projects only", forks: "Forks only", archived: "Archived only" },
     sortOptions: { updated: "Most recently updated", stars: "Most starred", name: "Name A-Z" },
     featuredLoading: "Calculating featured repositories.",
     featuredEmpty: "There are no featured repositories to show yet.",
@@ -164,6 +164,8 @@ const dynamicCopy = {
     repoForks: ({ value }) => `Forks ${value}`,
     repoLive: "Live",
     repoLabel: "Repo",
+    repoPromoBadge: "Promo Page",
+    repoPromoAction: "Promo Page ↗",
     repoArchived: "Archived",
     repoFork: "Fork",
     repoFeatured: "Featured",
@@ -192,7 +194,7 @@ const dynamicCopy = {
     statusCached: ({ time }) => `최근 캐시된 GitHub 스냅샷 기준입니다. 마지막 동기화: ${time}`,
     statusStale: ({ time }) => `임시 캐시 스냅샷을 표시 중입니다. 마지막 동기화: ${time}`,
     allLabel: "전체",
-    typeOptions: { all: "전체", source: "원본 저장소만", forks: "포크만", archived: "보관 저장소만" },
+    typeOptions: { all: "전체", promo: "✨ 홍보 페이지 보유만", source: "원본 저장소만", forks: "포크만", archived: "보관 저장소만" },
     sortOptions: { updated: "최신 업데이트", stars: "스타 순", name: "이름 순" },
     featuredLoading: "대표 프로젝트를 선별하는 중입니다.",
     featuredEmpty: "표시할 대표 저장소가 아직 없습니다.",
@@ -208,6 +210,8 @@ const dynamicCopy = {
     repoForks: ({ value }) => `포크 ${value}`,
     repoLive: "라이브",
     repoLabel: "소스",
+    repoPromoBadge: "홍보 페이지",
+    repoPromoAction: "홍보 페이지 ↗",
     repoArchived: "보관",
     repoFork: "포크",
     repoFeatured: "핵심",
@@ -447,19 +451,35 @@ async function fetchAllRepos(user) {
 function hydrate(profile, repos, timestamp, fromCache, isStale) {
   state.profile = profile;
   state.repos = repos
-    .map((repo) => ({
-      id: repo.id,
-      name: repo.name,
-      htmlUrl: repo.html_url,
-      homepage: repo.homepage,
-      description: repo.description || "",
-      rawLanguage: repo.language || "",
-      stars: repo.stargazers_count || 0,
-      forks: repo.forks_count || 0,
-      archived: Boolean(repo.archived),
-      fork: Boolean(repo.fork),
-      pushedAt: repo.pushed_at,
-    }))
+    .map((repo) => {
+      const name = repo.name || "";
+      const hasPages = Boolean(repo.hasPages ?? repo.has_pages);
+      let promoUrl = repo.promoUrl || null;
+
+      if (!promoUrl) {
+        if (hasPages && name.toLowerCase() !== `${username.toLowerCase()}.github.io`) {
+          promoUrl = `https://${username}.github.io/${name}/`;
+        } else if (repo.homepage && repo.homepage.trim() && !repo.homepage.trim().includes("github.com/")) {
+          promoUrl = repo.homepage.trim();
+        }
+      }
+
+      return {
+        id: repo.id,
+        name: name,
+        htmlUrl: repo.htmlUrl || repo.html_url,
+        homepage: repo.homepage,
+        hasPages: hasPages,
+        promoUrl: promoUrl,
+        description: repo.description || "",
+        rawLanguage: repo.rawLanguage || repo.language || "",
+        stars: repo.stars ?? repo.stargazers_count ?? 0,
+        forks: repo.forks ?? repo.forks_count ?? 0,
+        archived: Boolean(repo.archived),
+        fork: Boolean(repo.fork),
+        pushedAt: repo.pushedAt || repo.pushed_at,
+      };
+    })
     .sort((left, right) => new Date(right.pushedAt) - new Date(left.pushedAt));
   state.syncedAt = timestamp;
   state.fromCache = fromCache;
@@ -536,7 +556,9 @@ function applyFilters() {
     filtered = filtered.filter((repo) => getRepoLanguage(repo) === language);
   }
 
-  if (type === "source") {
+  if (type === "promo") {
+    filtered = filtered.filter((repo) => Boolean(repo.promoUrl));
+  } else if (type === "source") {
     filtered = filtered.filter((repo) => !repo.fork && !repo.archived);
   } else if (type === "forks") {
     filtered = filtered.filter((repo) => repo.fork);
@@ -603,18 +625,19 @@ function renderRepoCard(repo, featured) {
   const description = repo.description || currentCopy.fallbackBio;
   const badges = [
     language ? `<span class="repo-badge repo-badge-language">${escapeHtml(language)}</span>` : "",
+    repo.promoUrl ? `<span class="repo-badge repo-badge-promo">✨ ${escapeHtml(currentCopy.repoPromoBadge)}</span>` : "",
     repo.archived ? `<span class="repo-badge repo-badge-muted">${escapeHtml(currentCopy.repoArchived)}</span>` : "",
     repo.fork ? `<span class="repo-badge repo-badge-muted">${escapeHtml(currentCopy.repoFork)}</span>` : "",
   ]
     .filter(Boolean)
     .join("");
   const featuredTag = featured ? `<span class="repo-tag">${escapeHtml(currentCopy.repoFeatured)}</span>` : "";
-  const homepageLink = repo.homepage
-    ? `<a class="repo-link" href="${escapeAttribute(repo.homepage)}" target="_blank" rel="noreferrer">${escapeHtml(currentCopy.repoLive)}</a>`
+  const promoLink = repo.promoUrl
+    ? `<a class="repo-link repo-link-promo" href="${escapeAttribute(repo.promoUrl)}" target="_blank" rel="noreferrer">${escapeHtml(currentCopy.repoPromoAction)}</a>`
     : "";
 
   return `
-    <article class="repo-card">
+    <article class="repo-card ${repo.promoUrl ? "has-promo" : ""}">
       <div class="repo-header">
         <div>
           <div class="repo-badges">
@@ -632,8 +655,8 @@ function renderRepoCard(repo, featured) {
           <span>${escapeHtml(currentCopy.repoForks({ value: formatNumber(repo.forks) }))}</span>
         </div>
         <div class="repo-links">
-          ${homepageLink}
-          <a class="repo-link" href="${escapeAttribute(repo.htmlUrl)}" target="_blank" rel="noreferrer">${escapeHtml(currentCopy.repoLabel)}</a>
+          ${promoLink}
+          <a class="repo-link repo-link-source" href="${escapeAttribute(repo.htmlUrl)}" target="_blank" rel="noreferrer">${escapeHtml(currentCopy.repoLabel)}</a>
         </div>
       </div>
     </article>

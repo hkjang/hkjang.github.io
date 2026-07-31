@@ -446,6 +446,13 @@ select {
   background: rgba(15, 118, 110, 0.12);
 }
 
+.repo-badge-promo {
+  color: #4338ca;
+  background: rgba(99, 102, 241, 0.14);
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  font-weight: 700;
+}
+
 .repo-badge-muted {
   color: #725b21;
   background: rgba(247, 198, 107, 0.24);

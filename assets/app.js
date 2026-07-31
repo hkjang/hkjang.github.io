@@ -129,24 +129,40 @@ function hydrate(profile, repos, timestamp, fromCache) {
 
 function normalizeRepos(repos) {
   return repos
-    .map((repo) => ({
-      id: repo.id,
-      name: repo.name,
-      htmlUrl: repo.html_url,
-      homepage: repo.homepage,
-      description: repo.description || "설명이 비어 있습니다. 저장소 링크에서 구조와 코드를 직접 확인할 수 있습니다.",
-      language: repo.language || "Other",
-      stars: repo.stargazers_count || 0,
-      forks: repo.forks_count || 0,
-      watchers: repo.watchers_count || 0,
-      archived: Boolean(repo.archived),
-      fork: Boolean(repo.fork),
-      openIssues: repo.open_issues_count || 0,
-      createdAt: repo.created_at,
-      updatedAt: repo.updated_at,
-      pushedAt: repo.pushed_at,
-      size: repo.size || 0,
-    }))
+    .map((repo) => {
+      const name = repo.name || "";
+      const hasPages = Boolean(repo.hasPages ?? repo.has_pages);
+      let promoUrl = repo.promoUrl || null;
+
+      if (!promoUrl) {
+        if (hasPages && name.toLowerCase() !== "hkjang.github.io") {
+          promoUrl = `https://hkjang.github.io/${name}/`;
+        } else if (repo.homepage && repo.homepage.trim() && !repo.homepage.trim().includes("github.com/")) {
+          promoUrl = repo.homepage.trim();
+        }
+      }
+
+      return {
+        id: repo.id,
+        name: name,
+        htmlUrl: repo.html_url || repo.htmlUrl,
+        homepage: repo.homepage,
+        hasPages: hasPages,
+        promoUrl: promoUrl,
+        description: repo.description || "설명이 비어 있습니다. 저장소 링크에서 구조와 코드를 직접 확인할 수 있습니다.",
+        language: repo.language || "Other",
+        stars: repo.stargazers_count || 0,
+        forks: repo.forks_count || 0,
+        watchers: repo.watchers_count || 0,
+        archived: Boolean(repo.archived),
+        fork: Boolean(repo.fork),
+        openIssues: repo.open_issues_count || 0,
+        createdAt: repo.created_at,
+        updatedAt: repo.updated_at,
+        pushedAt: repo.pushed_at,
+        size: repo.size || 0,
+      };
+    })
     .sort((left, right) => new Date(right.pushedAt) - new Date(left.pushedAt));
 }
 
@@ -268,19 +284,20 @@ function renderProjectGrid() {
 function renderRepoCard(repo, featured) {
   const badges = [
     repo.language ? `<span class="repo-badge repo-badge-language">${escapeHtml(repo.language)}</span>` : "",
+    repo.promoUrl ? '<span class="repo-badge repo-badge-promo">✨ 홍보 페이지</span>' : "",
     repo.archived ? '<span class="repo-badge repo-badge-muted">Archived</span>' : "",
     repo.fork ? '<span class="repo-badge repo-badge-muted">Fork</span>' : "",
   ]
     .filter(Boolean)
     .join("");
 
-  const homepageLink = repo.homepage
-    ? `<a class="repo-link" href="${escapeAttribute(repo.homepage)}" target="_blank" rel="noreferrer">Live</a>`
+  const promoLink = repo.promoUrl
+    ? `<a class="repo-link repo-link-promo" href="${escapeAttribute(repo.promoUrl)}" target="_blank" rel="noreferrer">홍보 페이지 ↗</a>`
     : "";
   const featuredTag = featured ? '<span class="repo-tag">Featured</span>' : "";
 
   return `
-    <article class="repo-card">
+    <article class="repo-card ${repo.promoUrl ? "has-promo" : ""}">
       <div class="repo-header">
         <div>
           <div class="repo-badges">
@@ -298,8 +315,8 @@ function renderRepoCard(repo, featured) {
           <span>Forks ${formatNumber(repo.forks)}</span>
         </div>
         <div class="repo-links">
-          ${homepageLink}
-          <a class="repo-link" href="${escapeAttribute(repo.htmlUrl)}" target="_blank" rel="noreferrer">Repo</a>
+          ${promoLink}
+          <a class="repo-link repo-link-source" href="${escapeAttribute(repo.htmlUrl)}" target="_blank" rel="noreferrer">소스</a>
         </div>
       </div>
     </article>
