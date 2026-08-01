@@ -656,3 +656,213 @@ main {
     transition-duration: 0.01ms !important;
   }
 }
+
+
+/* ==========================================================================
+   Comprehensive Mobile & Responsive Design Enhancements
+   ========================================================================== */
+
+.mobile-menu-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(17, 32, 59, 0.12);
+  color: #0f172a;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.dark .mobile-menu-btn {
+  color: #f8fafc;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+@media (max-width: 992px) {
+  html, body, .site-shell {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+    padding-top: 20px !important;
+  }
+
+  .answer-grid,
+  .value-grid,
+  .approach-grid,
+  .faq-grid,
+  .controls-panel {
+    grid-template-columns: 1fr !important;
+  }
+
+  .repo-grid,
+  .repo-grid-featured {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .topbar {
+    top: 8px;
+    width: calc(100vw - 24px);
+    margin: 8px auto 0;
+    padding: 10px 14px;
+    border-radius: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .mobile-menu-btn {
+    display: flex;
+  }
+
+  .topbar-actions {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding-top: 14px;
+    margin-top: 10px;
+    border-top: 1px solid rgba(17, 32, 59, 0.08);
+  }
+
+  .topbar-actions.active {
+    display: flex;
+  }
+
+  .topbar-links {
+    flex-direction: column;
+    width: 100%;
+    gap: 6px;
+    overflow-x: visible;
+  }
+
+  .topbar-links a {
+    width: 100%;
+    text-align: center;
+    padding: 10px 16px;
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  .locale-toggle {
+    width: 100%;
+    justify-content: center;
+    padding: 10px 16px;
+    font-size: 0.95rem;
+  }
+
+  .hero {
+    margin-top: 0 !important;
+    padding-top: 32px !important;
+  }
+
+  .hero-copy {
+    padding: 24px 18px !important;
+    border-radius: 20px !important;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(1.85rem, 7.5vw, 2.75rem) !important;
+    line-height: 1.2 !important;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .hero-actions .button,
+  .hero-actions a {
+    width: 100% !important;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .hero-lab {
+    min-height: auto !important;
+    padding: 28px 18px !important;
+    border-radius: 20px !important;
+    margin-top: 16px;
+  }
+
+  .lab-orbit {
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+    width: 160px !important;
+    height: 160px !important;
+    aspect-ratio: 1 !important;
+    margin: 0 auto 20px !important;
+  }
+
+  .controls-panel {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    padding: 16px !important;
+    border-radius: 16px !important;
+  }
+
+  .controls-panel input,
+  .controls-panel select,
+  .controls-panel button {
+    width: 100% !important;
+    font-size: 0.95rem !important;
+  }
+
+  .repo-card {
+    padding: 20px 16px !important;
+    border-radius: 16px !important;
+  }
+
+  .repo-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .repo-footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .repo-links {
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+  }
+
+  .repo-link {
+    width: 100% !important;
+    justify-content: center;
+    padding: 10px 14px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-shell {
+    padding: 0 10px;
+  }
+  .topbar {
+    width: calc(100vw - 16px);
+  }
+  .hero-copy h1 {
+    font-size: 1.75rem !important;
+  }
+}
