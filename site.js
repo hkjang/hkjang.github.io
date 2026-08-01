@@ -1,6 +1,11 @@
 const username = document.body.dataset.username || "hkjang";
-const cacheKey = `portfolio:${username}:v6`;
+const cacheKey = `portfolio:${username}:v7`;
 const pinnedProjectNames = ["invenqor", "vibe-coders", "clustara", "jayu", "dataworks", "ArgosAISecurity", "signal-hub"];
+const knownPromoRepos = new Set([
+  "clustara", "git-ctx", "gitframe", "invenqor", "jamypg", "kanpic",
+  "mattermost-echosummary-plugin", "mattermost-flow-plugin", "mattermost-ocs-plugin",
+  "playwright-player", "postra", "sqlon", "velo", "vibe-coders"
+]);
 const localeKey = `portfolio:${username}:locale`;
 const cacheTtlMs = 1000 * 60 * 30;
 const initialVisibleCount = 18;
@@ -453,11 +458,12 @@ function hydrate(profile, repos, timestamp, fromCache, isStale) {
   state.repos = repos
     .map((repo) => {
       const name = repo.name || "";
+      const lowerName = name.toLowerCase();
       const hasPages = Boolean(repo.hasPages ?? repo.has_pages);
       let promoUrl = repo.promoUrl || null;
 
       if (!promoUrl) {
-        if (hasPages && name.toLowerCase() !== `${username.toLowerCase()}.github.io`) {
+        if ((hasPages || knownPromoRepos.has(lowerName)) && lowerName !== `${username.toLowerCase()}.github.io`) {
           promoUrl = `https://${username}.github.io/${name}/`;
         } else if (repo.homepage && repo.homepage.trim() && !repo.homepage.trim().includes("github.com/")) {
           promoUrl = repo.homepage.trim();
@@ -817,6 +823,10 @@ function compareDates(left, right) {
 
 function readCache() {
   try {
+    for (let i = 1; i <= 6; i++) {
+      try { window.localStorage.removeItem(`portfolio:${username}:v${i}`); } catch (e) {}
+    }
+
     const raw = window.localStorage.getItem(cacheKey);
     if (!raw) {
       return null;
