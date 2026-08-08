@@ -59,6 +59,7 @@ const koStaticText = {
   "nav.approach": "실행 방식",
   "nav.faq": "FAQ",
   "nav.contact": "협업",
+  "nav.sponsor": "💖 스폰서",
   "hero.status": "서울에서 만들고 공개하는 중",
   "hero.eyebrow": "Enterprise AI · Cloud Native · Open Source",
   "hero.title": "복잡한 기술을, 사람이 실제로 쓰는 시스템으로 만듭니다.",
@@ -66,6 +67,7 @@ const koStaticText = {
     "AI, 클라우드 네이티브 인프라, 데이터 플랫폼과 개발 도구를 탐구한 공개 저장소입니다. 완성된 주장만이 아니라 업데이트와 시행착오까지 함께 보여드립니다.",
   "hero.ctaPrimary": "대표 프로젝트 보기",
   "hero.ctaSecondary": "GitHub에서 소스 확인",
+  "hero.ctaSponsor": "💖 GitHub 스폰서",
   "hero.point1": "엔터프라이즈 AI 플랫폼 설계",
   "hero.point2": "Kubernetes·Data·DevSecOps 제품화",
   "hero.point3": "검증 가능한 오픈소스 결과물",
@@ -137,6 +139,7 @@ const koStaticText = {
     "가장 최신 정보는 항상 GitHub에 있습니다. 관심 있는 저장소를 열어 기술 완성도와 실행 속도를 바로 확인해 보세요.",
   "cta.primary": "전체 저장소 바로 보기",
   "cta.secondary": "GitHub 프로필 보기",
+  "cta.sponsor": "💖 GitHub에서 스폰서하기",
   "footer.builtWith": "GitHub Pages 위에 구축했고, GitHub REST API와 구조화 메타데이터를 결합해 검색과 답변 엔진 가시성을 높였습니다.",
 };
 
